@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import logo from '../../assets/logo2.png';
-import { useContext } from "react";
+
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useContext } from "react";
 
 const NavBar = () => {
     const {user , logOut} = useContext(AuthContext);
@@ -45,7 +46,7 @@ const NavBar = () => {
                 {
                     user ? <>
                         <span></span>
-                        <button onClick={handleSignOut} className="btn btn-outline border-white text-white mx-2">Log Out</button>
+                        <button onClick={handleSignOut} className="btn btn-outline border-black  text-white mx-2">Log Out</button>
 
                         <div className="avata " >
                             <div className="w-12" >
@@ -60,7 +61,7 @@ const NavBar = () => {
                         :
                         <div className="navbar-end gap-5">
                             <Link to="/logIn">
-                                <a className="btn btn-outline border-white text-white">Log-In</a>
+                                <a className="btn btn-outline border-black  text-white">Log-In</a>
                             </Link>
 
                         </div>
