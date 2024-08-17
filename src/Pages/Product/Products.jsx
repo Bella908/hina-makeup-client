@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
+    const [sortField, setSortField] = useState('price');
+const [sortOrder, setSortOrder] = useState('asc'); // 'asc' for ascending, 'desc' for descending
+
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
@@ -23,7 +26,9 @@ const Products = () => {
                         brand: brand,
                         category: category,
                         minPrice: minPrice,
-                        maxPrice: maxPrice
+                        maxPrice: maxPrice,
+                        sortField: sortField,
+                        sortOrder: sortOrder
                     }
                 });
                 setProducts(response.data.items);
@@ -32,9 +37,10 @@ const Products = () => {
                 console.error('Error fetching the products:', error);
             }
         };
-
+    
         fetchProducts();
-    }, [currentPage, searchTerm, brand, category, minPrice, maxPrice]);
+    }, [currentPage, searchTerm, brand, category, minPrice, maxPrice, sortField, sortOrder]);
+    
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
@@ -83,13 +89,22 @@ const Products = () => {
                     <option value="YSL">YSL</option>
                     <option value="Charlotte Tilbury">Charlotte Tilbury</option>
                     <option value="NARS">NARS</option>
+                    <option value="Pat McGrath">Pat McGrath</option>
+                    <option value="Huda Beauty">Huda Beauty</option>
+                    <option value="Kosas">Kosas</option>
+                    <option value="e.l.f">e.l.f</option>
+                    <option value="MAC">MAC</option>
                     {/* Add more brands as needed */}
                 </select>
                 <select value={category} onChange={handleCategoryChange} className="p-2 border border-gray-300 rounded">
                     <option value="">Select Category</option>
                     <option value="Foundation">Foundation</option>
                     <option value="Lipstick">Lipstick</option>
+                    <option value="Mascara">Mascara</option>
                     <option value="Concealer">Concealer</option>
+                    <option value="Concealer">Bronzer</option>
+                
+                    <option value="Blush">Blush</option>
                     {/* Add more categories as needed */}
                 </select>
                 <div className="flex gap-2">
@@ -108,6 +123,14 @@ const Products = () => {
                         className="p-2 border border-gray-300 rounded w-1/2"
                     />
                 </div>
+                <select value={sortField} onChange={(e) => setSortField(e.target.value)} className="p-2 border border-gray-300 rounded">
+        <option value="price">Sort by Price</option>
+        <option value="dateAdded">Sort by Date Added</option>
+    </select>
+    <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="p-2 border border-gray-300 rounded">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+    </select>
             </div>
 
             {/* Products Grid */}
@@ -120,6 +143,8 @@ const Products = () => {
                         <div className="card-body p-4">
                             <h2 className="card-title text-lg font-semibold">{product.productName}</h2>
                             <p>{product.description}</p>
+                            <p className="text-xl font-semibold">{product.brand}</p>
+
                             <p className="text-xl font-bold mt-2">${product.price}</p>
                         </div>
                     </div>
