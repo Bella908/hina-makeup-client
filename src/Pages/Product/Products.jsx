@@ -18,7 +18,7 @@ const [sortOrder, setSortOrder] = useState('asc'); // 'asc' for ascending, 'desc
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/items', {
+                const response = await axios.get('https://make-up-server-fdmam6lco-mumtahinas-projects-ec97b8c1.vercel.app/items', {
                     params: {
                         page: currentPage,
                         limit: itemsPerPage,
