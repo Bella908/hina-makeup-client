@@ -14,7 +14,7 @@ import AuthProvider from './AuthProvider/AuthProvider.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <div className='max-w-7xl mx-auto'>
+  <div className=''>
     <React.StrictMode>
       <AuthProvider>
         
